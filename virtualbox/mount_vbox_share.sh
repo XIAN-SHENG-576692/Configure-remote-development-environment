@@ -4,20 +4,20 @@ usage() {
     echo "\
 Usage: $0 -m <MOUNT_POINT> -s <SHARE_NAME> [OPTION]...
 
-Configures automounting for shared folders on boot.
+Mounts the VirtualBox shared folder and adds persistent boot configuration.
 
 This script must be run as root (e.g., using sudo).
 
 Parameters:
-  -m, --mount
-      The desired Mount Point Path (e.g., /mnt/outside)
+    -m, --mount
+        The Mount Point Path to mount (e.g., /mnt/outside)
 
-  -s, --share
-      The VirtualBox Shared Folder Name (e.g., shared)
+    -s, --share
+        The VirtualBox Shared Folder Name (e.g., shared)
 
 Options:
-  -h, --help
-      Print help
+    -h, --help
+        Print help
 "
     exit 1
 }
@@ -37,7 +37,7 @@ fi
 MOUNT_POINT=""
 SHARE_NAME=""
 
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
     case "$1" in
         -h|--help)
             usage
@@ -65,6 +65,8 @@ if [ -z "$MOUNT_POINT" ] || [ -z "$SHARE_NAME" ]; then
     echo ""
     usage
 fi
+
+echo "Mounting '$MOUNT_POINT'..."
 
 # Create the mount point directory
 mkdir -p "$MOUNT_POINT"

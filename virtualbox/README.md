@@ -46,14 +46,31 @@ To enable mount shared folders
 
 ### 3. On the **VM** as the **root user**
 
-1. Mount Shared Folders
-    To mount a VirtualBox shared folder, run the following:
+#### Shared Folders
+
+- Temporarily mount shared folder
     ```shell
-    mount -t vboxsf <Folder_Name_from_VirtualBox_Settings> <Mount_Path_in_VM>
+    mount -t vboxsf <SHARD_NAME> <MOUNT_POINT>
+    ```
+    Example:
+    ```shell
+    mount -t vboxsf shared /mnt/outside
     ```
 
-2. Run Configuration Scripts
-    Execute the provided scripts to automate the environment setup:
+- Persistently mount shared folder
     ```shell
-    vbox_permanent_shares.sh -m <MOUNT_POINT> -s <SHARD_NAME>
+    mount_vbox_share.sh -m <MOUNT_POINT> -s <SHARD_NAME>
+    ```
+    Example:
+    ```shell
+    mount_vbox_share.sh -m /mnt/outside -s shared
+    ```
+
+- Unmount persistently mounted shared folder
+    ```shell
+    unmount_vbox_share.sh -m <MOUNT_POINT> -s <SHARD_NAME>
+    ```
+    Example:
+    ```shell
+    unmount_vbox_share.sh -m /mnt/outside -s shared
     ```
