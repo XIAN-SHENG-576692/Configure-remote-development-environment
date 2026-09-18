@@ -31,18 +31,18 @@ This guide demonstrates how to connect remote via SSH.
     code --install-extension ms-vscode-remote.remote-ssh
     ```
 
-### On the **Host** as the **root user**
-
-1. Set up the sshd service:
-    ```shell
-    setup_sshd.sh
-    ```
-
 ### On the **Host** as the **rootless user**
 
 1. Configure the public key:
     ```shell
     sshd_add_pub_key.sh -p <PUB_KEY>
+    ```
+
+### On the **Host** as the **root user**
+
+1. Set up the sshd service:
+    ```shell
+    setup_sshd.sh
     restart_sshd.sh
     ```
 

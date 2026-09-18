@@ -4,8 +4,17 @@ echo "--- Detecting Init System & Restarting SSH ---"
 # Check SSH configuration syntax first
 if sshd -t; then
     if command -v systemctl >/dev/null 2>&1; then
-        echo "Detected systemd. Restarting service..."
-        systemctl restart ssh || systemctl restart sshd
+        echo "Detected systemd."
+        systemctl list-unit-files ssh.service >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo "Detected ssh. Restarting service..."
+            systemctl restart ssh
+        fi
+        systemctl list-unit-files sshd.service >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo "Detected sshd. Restarting service..."
+            systemctl restart sshd
+        fi
     elif command -v rc-service >/dev/null 2>&1; then
         echo "Detected OpenRC. Restarting service..."
         rc-service sshd restart

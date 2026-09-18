@@ -23,7 +23,8 @@ sed -i 's/^#\?AllowTcpForwarding.*/AllowTcpForwarding yes/' "$SSHD_CONFIG"
 sed -i 's/^#\?PermitEmptyPasswords.*/PermitEmptyPasswords no/' "$SSHD_CONFIG"
 
 echo "--- Step 3: Restarting SSH ---"
-if [[ $SCRIPT_DIR/restart_sshd.sh -ne 0 ]]; then
+"$SCRIPT_DIR/restart_sshd.sh"
+if [ $? -ne 0 ]; then
    echo "Restoring backup..."
    cp "$BACKUP_FILE" "$SSHD_CONFIG"
    exit 1
